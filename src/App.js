@@ -1,23 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import { createTheme, ThemeProvider } from "@mui/material";
+import SmallComponent from "./SmallComponent";
+import "./App.css";
 
 function App() {
+  const [toggleDark, settoggleDark] = useState(false);
+  const myTheme = createTheme({
+    // Theme settings
+    palette: {
+      mode: toggleDark ? "dark" : "light",
+    },
+  });
+
+  console.table(myTheme);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <ThemeProvider theme={myTheme}>
+        <SmallComponent toggleDark={toggleDark} settoggleDark={settoggleDark} />
+      </ThemeProvider>
     </div>
   );
 }
